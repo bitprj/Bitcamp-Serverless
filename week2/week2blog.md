@@ -1,12 +1,3 @@
-# Week 2 Blog Post
-
-Assignee(s): Emily Chen
-Category: Bit Camp
-Department: Student Programs
-Last Edited: Dec 2, 2020 6:56 PM
-Status: In progress
-
-[Parse multipart, Face API (beard)](https://github.com/emsesc/bitcamp-serverless)
 
 ## **Week 2**
 
