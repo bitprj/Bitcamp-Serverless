@@ -1,4 +1,4 @@
-## Displaying Emotion Data and Calculating Valence
+## Displaying Emotion Data
 
 In the html page, we referenced a face.js file. Create a new file called face.js that will handle javascript related to the form and Azure Function call.
 
@@ -64,21 +64,7 @@ Now we need to create our main function called `handle(event) {}`. It will be ca
    // Finish for other data types using the same format (i.e. ${emotion.contempt}, and etc)
    ```
 
-4. Now that we have our emotion data, we need to calculate valence. Valence is the measurement of happiness or positivity in a song. For example, if a song is sad and depressing, it will have a lower valence and vice-versa. If you want a more detailed explanation, check out this post [here](https://community.spotify.com/t5/Content-Questions/Valence-as-a-measure-of-happiness/td-p/4385221#:~:text=In%20Spotify%27s%20API%20is%20something%20called%20Valence%2C%20that,low%20valence%20sound%20more%20negative%20%28sad%2C%20depressed%2C%20angry%29.).
-
-   ```javascript
-   var valence = emotion.happiness + emotion.surprise - emotion.anger - emotion.contempt - emotion.disgust - emotion.fear - emotion.sadness;
-   ```
-
-   I've given you the first few lines of code that set `valence` to a value from 0-1 based on the values of given emotions. If you looked closely, you would notice that `emotion.neutral` isn't there. What you need to do is create three conditionals that do three different things.
-
-   ​	i. The first conditional checks if valence is less than `emotion.neutral`, if it is, it sets valence 	to `0.5`.
-
-   ​	ii. The second conditional checks whether valence is greater than `1`, if it is, it sets valence 	to `1`.
-
-   ​	iii. The last conditional checks whether valence is less than `0`, if it is, it sets valence to `0`.
-
-   These conditionals make it easier to recommend a song. Rather than having a crazy number between 0-1, it uses the data and sorts the song to either be 0, 0.5, or 1. The last thing we need to do is to use jQuery to change two divs, `hidden-emotion` and `emotion`. 
+4. The last thing we need to do is to use jQuery to change two divs, `hidden-emotion` and `emotion`. 
 
    ```javascript
    $('#emotion').html(/* Emotion Data should go here */);
