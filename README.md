@@ -27,16 +27,12 @@ Intro to Functions 🧰
 **Learning Objectives**
 - Parsing multipart data + Outputting in JSON
 - Installing npm dependencies
-- Working with the Face API
+- Working with the Face API + Reading its documentation
+- Calling and Testing API Endpoints ft. Postman
 
 ### **Week 3**
 **Learning Objectives**
 - Calling Azure Functions
 - Learning HTML/CSS
 - Uploading Images with Forms
-
-### **Week 4**
-**Learning Objectives**
-- Calling and Testing API Endpoints ft. Postman
-- Reading API Documentation
-- Build a working app end to end!
+- Completing the working app end to end!
