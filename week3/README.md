@@ -21,6 +21,6 @@ We'll be going over how to:
 
 
 ### Homework
-Create an HTML webpage that allows the user to submit an image and submit by pressing a button.
+Create an HTML webpage that allows the user to submit an image and submit by pressing a button. Integrate JavaScript that calls the Azure Function and displays the resulting emotion data to users.
 - The step by step runthrough is located in the [issues folder](https://github.com/bitprj/Bitcamp-Serverless/blob/master/week3/homework/issues). Follow the issues numerically to complete the project. 
 - Any starter and solution code is in the [code folder](https://github.com/bitprj/Bitcamp-Serverless/tree/master/week3/homework/code/solution) in homework.
