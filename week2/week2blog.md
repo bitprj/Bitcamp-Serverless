@@ -34,26 +34,31 @@ Like last week, we'll be creating an HTTP Trigger to parse the image and analyze
 
 > Tip: It might be helpful to keep track of the Function App name and Resource Group for later in the project.
 
-- Now that we have a new Function App, [create a new **HTTP Trigger](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function#create-function)** to begin the actual coding.
+- Now that we have a new Function App, [create a new **HTTP Trigger**](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function#create-function) to begin the actual coding.
 
 ## 🖥️ Installing Dependencies
 
 We are going to be using some npm packages in our HTTP Trigger, so we must install them in order for our code to even work.
 
-<details open>
+<details>
 <summary>What are npm packages/dependencies?</summary>
 <br>
+	
 Think of them like **pre-written bits of code** that are made for us by other developers. All we have to do is install the package, reference it in our code, and voila! We don't have to write extra code.
-> **Example:** Let's say I want to convert an image to a PDF. I can install [this](https://www.npmjs.com/package/images-to-pdf) package, install it with `npm i images-to-pdf` , and successfully convert my images. *I don't have to write extra code to make the file conversion... I can just "depend" on the npm package*
+
+> Example: Let's say I want to convert an image to a PDF. I can install the images-to-pdf package with `npm i images-to-pdf` , and successfully convert my images. *I don't have to write extra code to make the file conversion... I can just "depend" on the [npm package](https://www.npmjs.com/package/images-to-pdf)*
+
 </details>
 
 **Commands to type into your console:**
 
-<details open>
+<details>
 <summary>Where is my console?</summary>
 <br>
+	
 Click on the "Console" tab in the left panel under "Development Tools".
-![Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled.png](Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled.png)
+![console](https://user-images.githubusercontent.com/69332964/102914316-14adbb80-444e-11eb-81ea-4f78f9b96ac5.png)
+
 </details>
 
 `npm init -y`
@@ -86,7 +91,7 @@ We're going to be working in this function!
 
 The **parse-multipart library** (`multipart`) is going to be used to parse the image from the POST request we will later make with Postman to test. 
 
-<details open>
+<details>
 <summary>Sidenote</summary>
 <br>
 During Week 3, we'll be making the POST request from a static web app (HTML page). Making the POST request with Postman is just for testing purposes.
@@ -99,10 +104,10 @@ During Week 3, we'll be making the POST request from a static web app (HTML page
 var body = req.body;
 ```
 
-If you were to context.log() `body` , you would get the raw body content because the data was sent formatted as `multipart/form-data`:
+If you were to context.log() `body` , you would get the raw body content because the data was sent formatted as [`multipart/form-data`](https://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean):
 
-<details open>
-<summary>Why [multipart/form-data](https://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean)?</summary>
+<details>
+<summary> Why multipart/form-data? </summary>
 <br>
 Because the image might be fairly large, we must send it in "multiple parts." We'll also be sending it from an HTML form.
 </details>
@@ -179,7 +184,7 @@ We're now going to create a Microsoft Cognitive Services Face API:
 2. Press **Create a Resource**
 3. Press the **AI + Machine Learning** tab on the left
 
-![Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled%201.png](Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled%201.png)
+![image](https://user-images.githubusercontent.com/69332964/102914571-82f27e00-444e-11eb-8c48-20dd09a4855b.png)
 
 Press **Face** and fill out the necessary information
 
@@ -187,15 +192,16 @@ Press **Face** and fill out the necessary information
 
 There are some secret strings we're going to need in order to communicate with the Face API. This includes the **endpoint** and the **subscription key**.
 
-![Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled%202.png](Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled%202.png)
+![image](https://user-images.githubusercontent.com/69332964/102914621-9271c700-444e-11eb-9e65-37c484dd106c.png)
 
 Enter into your Face API resource and click on **Keys and Endpoint.** You're going to need KEY 1 and ENDPOINT
 
 Now, head back to the Function App, and we're going to add these values into the Application Settings. Follow [this tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to do so.
 
-<details open>
+<details>
 <summary>Why does it have to be secret?</summary>
 <br>
+
 Short answer: [it's dangerous not to keep them secret.](https://www.lockr.io/blog/why-you-need-api-key-security/).
 </details>
 
@@ -368,24 +374,29 @@ Our HTTP trigger Azure Function receives an image as an input and outputs beard 
 1. You can choose to sign up or skip and go directly to the app.
 2. Close out all the tabs that pop up until you reach **this screen**
 
-    ![https://user-images.githubusercontent.com/69332964/98034295-c46a9380-1de4-11eb-8f8d-ca508f4e04ef.png](https://user-images.githubusercontent.com/69332964/98034295-c46a9380-1de4-11eb-8f8d-ca508f4e04ef.png)
+![Postman screen](https://user-images.githubusercontent.com/69332964/98034295-c46a9380-1de4-11eb-8f8d-ca508f4e04ef.png)
 
 > Now it is time to send a POST request to the HTTP Trigger Function, so using the drop-down arrow, change "GET" to "POST"
 The goal? Receive beard data from an inputted image.
 
 1. **Specifying the API Endpoint:** Enter your function URL, which is the API endpoint, into the text box next to POST
-- How to get the function url?
+<details>
+<summary>How to get the function url?</summary>
+<br>
 
-    Go to your Function's code and find this:
+Go to your Function's code and find this:
 
-    ![Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled%203.png](Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled%203.png)
+![Function URL](https://user-images.githubusercontent.com/69332964/102914770-ccdb6400-444e-11eb-97c9-04dc5c4e65ef.png)
 
-    Click to copy!
+Click to copy!
+ 
+</details>
+
 
 1. **Setting the Header:** Click on "Headers" and enter `content-type` into Key and `multipart/form-data` into Value. 
 2. **Adding your beard image:** Click on "Body" and enter `image` into Key and use the dropdown to select "file" in order to upload an image.
 
-![Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled%204.png](Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled%204.png)
+![Postman Dropdown](https://user-images.githubusercontent.com/69332964/102914828-e381bb00-444e-11eb-83b1-d73be50b97c5.png)
 
 3. Now, just click **Send** and get that beard data!
 
