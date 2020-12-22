@@ -184,7 +184,7 @@ We're now going to create a Microsoft Cognitive Services Face API:
 2. Press **Create a Resource**
 3. Press the **AI + Machine Learning** tab on the left
 
-![image](https://user-images.githubusercontent.com/69332964/102914571-82f27e00-444e-11eb-8c48-20dd09a4855b.png)
+![Face API](https://user-images.githubusercontent.com/69332964/102914571-82f27e00-444e-11eb-8c48-20dd09a4855b.png)
 
 Press **Face** and fill out the necessary information
 
@@ -192,7 +192,7 @@ Press **Face** and fill out the necessary information
 
 There are some secret strings we're going to need in order to communicate with the Face API. This includes the **endpoint** and the **subscription key**.
 
-![image](https://user-images.githubusercontent.com/69332964/102914621-9271c700-444e-11eb-9e65-37c484dd106c.png)
+![Secrets](https://user-images.githubusercontent.com/69332964/102914621-9271c700-444e-11eb-9e65-37c484dd106c.png)
 
 Enter into your Face API resource and click on **Keys and Endpoint.** You're going to need KEY 1 and ENDPOINT
 
