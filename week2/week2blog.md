@@ -40,19 +40,21 @@ Like last week, we'll be creating an HTTP Trigger to parse the image and analyze
 
 We are going to be using some npm packages in our HTTP Trigger, so we must install them in order for our code to even work.
 
-- What are npm packages/dependencies?
-
-    Think of them like **pre-written bits of code** that are made for us by other developers. All we have to do is install the package, reference it in our code, and voila! We don't have to write extra code.
-
-    > **Example:** Let's say I want to convert an image to a PDF. I can install [this](https://www.npmjs.com/package/images-to-pdf) package, install it with `npm i images-to-pdf` , and successfully convert my images. *I don't have to write extra code to make the file conversion... I can just "depend" on the npm package*
+<details open>
+<summary>What are npm packages/dependencies?</summary>
+<br>
+Think of them like **pre-written bits of code** that are made for us by other developers. All we have to do is install the package, reference it in our code, and voila! We don't have to write extra code.
+> **Example:** Let's say I want to convert an image to a PDF. I can install [this](https://www.npmjs.com/package/images-to-pdf) package, install it with `npm i images-to-pdf` , and successfully convert my images. *I don't have to write extra code to make the file conversion... I can just "depend" on the npm package*
+</details>
 
 **Commands to type into your console:**
 
-- Where is my console?
-
-    Click on the "Console" tab in the left panel under "Development Tools".
-
-    ![Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled.png](Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled.png)
+<details open>
+<summary>Where is my console?</summary>
+<br>
+Click on the "Console" tab in the left panel under "Development Tools".
+![Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled.png](Week%202%20Blog%20Post%20cb76d2796f744e22a90e76bd20d7d9cd/Untitled.png)
+</details>
 
 `npm init -y`
 
@@ -84,9 +86,12 @@ We're going to be working in this function!
 
 The **parse-multipart library** (`multipart`) is going to be used to parse the image from the POST request we will later make with Postman to test. 
 
-- Sidenote:
+<details open>
+<summary>Sidenote</summary>
+<br>
+During Week 3, we'll be making the POST request from a static web app (HTML page). Making the POST request with Postman is just for testing purposes.
+</details>
 
-    During Week 3, we'll be making the POST request from a static web app (HTML page). Making the POST request with Postman is just for testing purposes.
 
 1️⃣ **First** let's define the body of the POST request we received.
 
@@ -96,9 +101,12 @@ var body = req.body;
 
 If you were to context.log() `body` , you would get the raw body content because the data was sent formatted as `multipart/form-data`:
 
-- Why [multipart/form-data](https://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean)?
+<details open>
+<summary>Why [multipart/form-data](https://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean)?</summary>
+<br>
+Because the image might be fairly large, we must send it in "multiple parts." We'll also be sending it from an HTML form.
+</details>
 
-    Because the image might be fairly large, we must send it in "multiple parts." We'll also be sending it from an HTML form.
 
 ```yaml
 ------WebKitFormBoundaryDtbT5UpPj83kllfw
@@ -185,9 +193,11 @@ Enter into your Face API resource and click on **Keys and Endpoint.** You're goi
 
 Now, head back to the Function App, and we're going to add these values into the Application Settings. Follow [this tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to do so.
 
-- Why does it have to be secret?
-
-    Short answer: [it's dangerous](https://www.lockr.io/blog/why-you-need-api-key-security/).
+<details open>
+<summary>Why does it have to be secret?</summary>
+<br>
+Short answer: [it's dangerous not to keep them secret.](https://www.lockr.io/blog/why-you-need-api-key-security/).
+</details>
 
 **Naming your secrets**
 
