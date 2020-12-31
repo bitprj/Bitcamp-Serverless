@@ -5,12 +5,12 @@ Last week, you learned how to retrieve data from the Face API, make HTTP request
 ### **Learning Objectives**
 
 - create an HTML page
-- display emotion data
+- display facial hair data
 - deploy using Azure Static Web Apps
 
 ### **Livestream**
 
-In the livestream, we're going to create an HTML file that displays our emotion data.
+In the livestream, we're going to create an HTML file that displays our facial hair data.
 
 - For the full video, look in the [video folder](https://github.com/emsesc/bitcamp-serverless/tree/master/week3/livestream).
 - For the full code, look in the [code folder](https://github.com/emsesc/bitcamp-serverless/tree/master/week3/livestream/code).
@@ -27,7 +27,7 @@ In the livestream, we're going to create an HTML file that displays our emotion 
 
 ## 📝 Review: Using HTML and CSS
 
-After watching the live demo, you should know the basics of how to create a simple website using the coding language, HTML, and some CSS if you want your webpage to look fancy. Now, we want to create our own HTML page that inputs an image using a `<form>` and outputs the image's emotion data.
+After watching the live demo, you should know the basics of how to create a simple website using the coding language, HTML, and some CSS if you want your webpage to look fancy. Now, we want to create our own HTML page that inputs an image using a `<form>` and outputs the image's facial hair data.
 
 If you still need some help learning HTML and CSS, checkout these resources:
 
@@ -47,7 +47,7 @@ We need to create the following HTML items. (Important: please use the exact sam
               * Set the `onChange` attribute to `"loadFile(event)"`. Use the `accept` attribute to only allow image submissions. Finally, set the `name` attribute to `image`.
             * `img` element with id `output`. This is going to display the image that the user selects.
             * `button` element with the `type` attribute set to `submit`. The text inside should say "Submit Picture" or something similar. This will submit the image.
-   2. Empty `div` with the id `emotion`. This is where the emotion analysis results will be displayed.
+   2. Empty `div` with the id `facial-hair`. This is where the facial hair analysis results will be displayed.
 
 Finally, we'll reference jQuery.
 
@@ -62,9 +62,9 @@ To test your page out locally, first make sure you have [LiveServer](https://mar
 
 ![](https://user-images.githubusercontent.com/69332964/99007366-0fd21f80-2512-11eb-9af9-311d89098c0b.png)
 
-## 😊 Displaying Emotion Data
+## 😊 Displaying Facial Hair Data
 
-Now we'll need to read in the JSON file and output the emotions onto our page.
+Now we'll need to read in the JSON file and output the facial hair onto our page.
 
 The first thing we need to do is create a function called `loadFile(event) {}` which creates a variable called `image` that gets the ID `"output"` and displays the image the user uploaded. To do this, we need to get the element ID by using `document.getElementByID(id)`.
 
@@ -77,99 +77,90 @@ function loadFile(event) {
 }
 ```
 
-Now we need to create our main function called `handle(event) {}`. This will take in the response; then, using the data from the Face API, it will create a new form that includes the amount of different emotions. As well, using the data from the Face API, it will display numerical values of emotion.
+Now we need to create our main function called `handle(event) {}`. This will take in the response; then, using the data from the Face API, it will create a new form that includes the various facial hair and their corresponding numerical values.
 
 1. Using [jQuery](http://jqfundamentals.com/chapter/jquery-basics), target the output element ID and change the content to equal "Loading". Then add the line, `event.preventDefault();` to disable the ability to reload the page. To event target with jQuery, use this sample:
 
    ```javascript
    console.log("submitting...")
-   $('#emotions').html('Loading...');
+   $('#facial-hair').html('Loading...');
    event.preventDefault();
    ```
 
-2. After telling our HTML to show the content "Loading", we need to set a few variables to create a new form with our emotion data. We can do this by adding a variable set to an element ID and creating a new `FormData` object based on the received information:
+2. After telling our HTML to show the content "Loading", we need to set a few variables to create a new form with our facial hair data. We can do this by adding a variable set to an element ID and creating a new `FormData` object based on the received information:
 
    ```javascript
-   var myform = document.getElementById('myform');
-   var payload = new FormData(myform);
+   var myForm = document.getElementById('image-form');
+   var payload = new FormData(myForm);
    
-   const resp = await fetch(config.functionUrl, {
+   const resp = await fetch(functionURL, {
        method: 'POST',
-       body: payload
+       body: payload,
    });
    ```
 
-3. Next, we have to add a variable for the JSON data. Make a new variable called `data` and set it to the response JSON like we did earlier. We also need another variable, `emotion`, which will be set to `data.result[0].faceAttributes.emotion;`. This sets `emotion` to the first result in our JSON data, and pulls the information out into a value. 
+3. Next, we have to add a variable for the JSON data. Make a new variable called `data` and set it to the response JSON like we did earlier. We also need another variable, `beard`, which will be set to `data.result[0].faceAttributes.facialHair;`. This sets `beard` to the first result in our JSON data, and pulls the information out into a value. 
 
    ```javascript
    var data = await resp.json();
-   var emotion = data.result[0].faceAttributes.emotion;
+   var beard = data.analysis[0].faceAttributes.facialHair;
    ```
 
 Lastly, we have to create the HTML that will actually be displayed:
 
-i. First, create an `<h3>` tag for the title labelled `emotions in this image:` (make sure to add `<br />` at the end to skip a line)
+i. First, create an `<h3>` tag for the title labelled `Facial Hair in image:` (make sure to add `<br />` at the end to skip a line)
 
-ii. Now create 8 `<p>` tags that each show data for a different emotion. The list of emotions are anger, contempt, disgust, fear, happiness, neutral, sadness, and surprise. 
+ii. Now create 3 `<p>` tags that each show data for a different facial hair type. The list of types are moustache, sideburns, and beard. 
 
-iii. To get the data, remember we set `var emotion` to pull the first value. All we have to do is use jQuery and use this formatting.
+iii. To get the data, remember we set `var beard` to pull the first value. All we have to do is use jQuery and use this formatting.
 
    ```javascript
 var resultString = `
-<h3>Emotions in the image:</h3><br />
-<p>anger: ${emotion.anger}</p>
-<p>contempt: ${emotion.contempt}</p>
-<p>disgust: ${emotion.disgust}</p>
-<p>fear: ${emotion.fear}</p>
-<p>happiness: ${emotion.happiness}</p>
-<p>neutral: ${emotion.neutral}</p>
-<p>sadness: ${emotion.sadness}</p>
-<p>surprise: ${emotion.surprise}</p>
-`;
+<h3> Facial Hair in image:</h3> <br />
+<p> Moustache: ${beard.moustache}</p>
+<p> Sideburns: ${beard.sideburns}</p>
+<p> Beard: ${beard.beard}</p>
+`
    ```
-The last thing we need to do is to use jQuery to change the emotion div, `emotion`. 
+The last thing we need to do is to use jQuery to change the facial hair div, `facial-hair`. 
 
    ```javascript
-$('#emotion').html(resultString);
+$('#facial-hair').html(resultString);
    ```
 In the end, your `handle` function should look like this:
 
 ```javascript
-async function handle(event){
-    console.log('submitting form...')
-    $('#emotion').html('Loading...');
+async function handle(event) {
+    console.log("submitting...")
+    $('#facial-hair').html('Loading...');
     event.preventDefault();
 
-    var myform = document.getElementById('myform');
-    var payload = new FormData(myform);
+    var myForm = document.getElementById('image-form');
+    var payload = new FormData(myForm);
 
-    const resp = await fetch(config.functionUrl, {
+    const resp = await fetch(functionURL, {
         method: 'POST',
-        body: payload
+        body: payload,
     });
 
     var data = await resp.json();
-    var emotion = data.result[0].faceAttributes.emotion;
+
+    var beard = data.analysis[0].faceAttributes.facialHair;
 
     var resultString = `
-    <h3>Emotions in the image:</h3><br />
-    <p>anger: ${emotion.anger}</p>
-    <p>contempt: ${emotion.contempt}</p>
-    <p>disgust: ${emotion.disgust}</p>
-    <p>fear: ${emotion.fear}</p>
-    <p>happiness: ${emotion.happiness}</p>
-    <p>neutral: ${emotion.neutral}</p>
-    <p>sadness: ${emotion.sadness}</p>
-    <p>surprise: ${emotion.surprise}</p>
-    `;
+    <h3> Facial Hair in image: </h3> <br />
+    <p> Moustache: ${beard.moustache}</p>
+    <p> Sideburns: ${beard.sideburns}</p>
+    <p> Beard: ${beard.beard}</p>
+    `
     
-    $('#emotion').html(resultString);
+    $('#facial-hair').html(resultString);
 }
 ```
 
 ## 😄 Deploying using Azure Static Web Apps
 
-Now that we can display emotion data and run our function locally, let's try deploying it onto the web so that everyone can access your website remotely. We'll be doing this through Azure Static Web Apps. 
+Now that we can display facial hair data and run our function locally, let's try deploying it onto the web so that everyone can access your website remotely. We'll be doing this through Azure Static Web Apps. 
 
 First, make sure:
 
@@ -211,6 +202,6 @@ Congratulations, you've just deployed a web app using Azure Static Web Apps!
 
 * Navigate to your custom URL 
 * Go through your project as if you were an user trying to use your product.
-* You should see emotion data printed out in the correct location!
+* You should see facial hair data printed out in the correct location!
 
 ### 🎉 That's the Week 3 Livestream! Reach out to your mentors if you're having trouble.
