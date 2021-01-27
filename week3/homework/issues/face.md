@@ -2,8 +2,7 @@
 
 In the html page, we referenced a face.js file. Create a new file called face.js that will handle javascript related to the form and Azure Function call.
 
-Now that our image has been analyzed by the Face API, we have received emotion data in JSON format. Our task is to read the JSON file and do two things, output the emotions in the image (ie. anger, contempt, disgust, etc) and convert the emotions to a scale called valence. This is what we are going to use to determine whether we recommend a song that is happy, sad, angry, etc.
-
+Now that our image has been analyzed by the Face API, we have received emotion data in JSON format. Our task is to read the JSON file and output the emotions in the image (ie. anger, contempt, disgust, etc).
 
 
 The first thing we need to do is create a function called `loadFile(event) {}` inside face.js which does two things, creates a variable called image which gets the ID "output" and displays the image the user uploaded. Every time the user presses **Upload File**, we want to display whatever image they choose. To do this, we need to get the element ID by using `document.getElementByID(id)`:
@@ -25,7 +24,7 @@ function loadFile(event) {
 <br />
 
 
-Now we need to create our main function called `handle(event) {}`. It will be called when the user presses submit, and will submit the image to our Azure Function for analysis. Using the data from the Face API, it will convert the numbers into valence which will be later used to determine which song(s) to recommend to the user.
+Now we need to create our main function called `handle(event) {}`. It will be called when the user presses submit, and will submit the image to our Azure Function for analysis. Using the data from the Face API, it will display numerical values of emotion.
 
 1. Using jQuery, target the output element ID and change the content to equal "Loading". Then add the line, `event.preventDefault();` to disable the ability to reload the page. To event target with jQuery, use this sample:
 
@@ -68,5 +67,4 @@ Now we need to create our main function called `handle(event) {}`. It will be ca
 
    ```javascript
    $('#emotion').html(/* Emotion Data should go here */);
-   $('#hidden-emotion').html(/* Valence should go here */);
    ```

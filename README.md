@@ -7,9 +7,9 @@ Serverless architectures offer greater scalability, more flexibility, and quicke
 
 ### **Week 1**
 **Learning Objectives**
-- Create and deploy an Azure Function
-- Intro to using beginner JS
-- Start working on request function
+- Downloading an IDE and Figuring Out the Basics
+- Configuring Azure, specifically Azure Functions (create and deploy your first Function)
+- Learning How to Use GitHub (commits, pull requests, etc)
 
 Setting Up 👷
 - Download IDE (VS Code)
@@ -27,16 +27,13 @@ Intro to Functions 🧰
 **Learning Objectives**
 - Parsing multipart data + Outputting in JSON
 - Installing npm dependencies
-- Working with the Face API
+- Making HTTP requests with fetch
+- Working with the Face API + Reading its documentation
+- Calling and Testing API Endpoints ft. Postman
 
 ### **Week 3**
 **Learning Objectives**
 - Calling Azure Functions
 - Learning HTML/CSS
 - Uploading Images with Forms
-
-### **Week 4**
-**Learning Objectives**
-- Calling and Testing API Endpoints ft. Postman
-- Reading API Documentation
-- Build a working app end to end!
+- Completing the working app end to end!
